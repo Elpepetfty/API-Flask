@@ -29,6 +29,7 @@ def registrar_busqueda(criterio, termino):
     db.session.commit()
 
 
+# Ruta de salud
 @app.route("/salud", methods=["GET"])
 def salud():
     return jsonify({
@@ -61,6 +62,8 @@ def buscar_titulo():
             "error": str(error)
         }), 502
 
+
+# Buscar libros por autor
 @app.route("/libros/autor", methods=["GET"])
 def buscar_autor():
     nombre = request.args.get("nombre", "").strip()
@@ -202,6 +205,7 @@ def guardar_libro():
     }), 201
 
 
+# Consultar los libros guardados
 @app.route("/biblioteca", methods=["GET"])
 def listar_biblioteca():
     libros = LibroGuardado.query.order_by(
@@ -222,6 +226,7 @@ def listar_biblioteca():
     return jsonify(resultados), 200
 
 
+# Eliminar un libro de la biblioteca
 @app.route("/biblioteca/<int:id>", methods=["DELETE"])
 def eliminar_libro(id):
     libro = db.session.get(LibroGuardado, id)
@@ -238,6 +243,8 @@ def eliminar_libro(id):
         "mensaje": "Libro eliminado correctamente"
     }), 200
 
+
+# Crear las tablas e iniciar el servidor
 if __name__ == "__main__":
 
     with app.app_context():

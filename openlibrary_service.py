@@ -32,3 +32,13 @@ def buscar(campo, valor):
  return [normalizar(item) for item in datos.get("docs", [])]
 def consultar_isbn(isbn):
  return solicitar(f"/isbn/{isbn}.json")
+def buscar_por_titulo(titulo):
+ return buscar("title", titulo)
+
+
+def buscar_por_autor(nombre):
+ return buscar("author", nombre)
+
+
+def buscar_por_isbn(isbn):
+ return consultar_isbn(isbn)
